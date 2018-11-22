@@ -7,6 +7,8 @@ jobs:
     steps:
       - setup_remote_docker
       - run: activate-gcloud-account.sh
+      - run: mkdir -p /tmp/workspace/var
+      - run: mkdir -p /tmp/workspace/src
       - run: git clone https://github.com/greenpeace/planet4-nro-generator.git
       - run: cd planet4-nro-generator
       - run: printf "%s\n" "$CIRCLE_TOKEN" "$GITHUB_OAUTH_TOKEN"
