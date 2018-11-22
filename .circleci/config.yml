@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    machine:
+      image: circleci/classic:latest
+    working_directory: ~/
+    steps:
+      - setup_remote_docker
+      - run: activate-gcloud-account.sh
+      - run: mkdir -p /tmp/workspace/var
+      - run: mkdir -p /tmp/workspace/src
+      - run: echo "${CIRCLE_BUILD_NUM}" > /tmp/workspace/var/circle-build-num
+      - run: git clone https://github.com/greenpeace/planet4-nro-generator.git
+      - run: cd planet4-nro-generator
+      - run: printf "%s\n" "$CIRCLE_TOKEN" "$GITHUB_OAUTH_TOKEN"
